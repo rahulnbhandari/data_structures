@@ -51,6 +51,18 @@ class LinkedList {
 
 	}
 
+	public function InsertAtNthLocation($data,$n) {
+		if($this->head == NULL) {
+			return $this->InsertAtFirst($data); 
+		}
+		$tail = $this->head;
+		while($tail->next) {
+			$tail = $tail->next;
+		}
+		$tail->next = new Node($data);
+		$this->count++;
+	}
+
 	public function push($data) {
 		return $this->InsertAtLast($data);
 	}
