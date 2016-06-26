@@ -17,9 +17,10 @@ function findMaxNum ($array) {
 			while($count) {
 				if(isset($count)) {
 					$sum+=$map[$count];
-					if($sum>=$count) {
+					
+				}
+				if($sum>=$count) {
 						return $count;
-					}
 				}
 				
 				$count--;
