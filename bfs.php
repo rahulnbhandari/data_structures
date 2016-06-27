@@ -28,11 +28,39 @@ class BST  {
 		return;
 	}
 
-	 public function BFS($data) {
+	 public function BFS($number) {
 	 	if($this->root) {
 	 		$queue = new SplQueue();
-	 		$queue->enqueue($data);
+	 		$visited = array();
+	 		$queue->enqueue($this->root);
+	 		$visited[] = $this->root->data;
+
+	 		while($queue->count()>0) {
+	 			$node = $queue->dequeue();
+
+	 			if($node->data == $number) {
+	 				
+	 				return true;
+	 			}
+	 			if($node->left) {
+	 				if(!in_array($node->left->data,$visited)) {
+	 					$visited[] = $node->left->data; 
+	 					$queue->enqueue($node->left);
+	 				}
+	 			}
+	 			if($node->right) {
+	 				if(!in_array($node->right->data,$visited)) {
+	 					$visited[] = $node->right->data; 
+	 					$queue->enqueue($node->right);
+	 				}
+	 			}
+
+
+	 		}
+	 		
 	 	}
+
+	 	return false;
 
 	 }
 
@@ -120,7 +148,8 @@ foreach($array1 as $num) {
 }
 $bst->printTree("PRE"); echo "\n";
 $bst->printTree("IN"); echo "\n";
-echo $bst->getTreeHeight();
+echo $bst->getTreeHeight();echo "\n";
+echo $bst->BFS(8);
 //($bst->root);
 
 ?>
