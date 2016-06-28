@@ -138,14 +138,55 @@ class BST  {
 		return;
 	}
 
+	protected function GetBalancedHeight($node) {
+		if($node == NULL) {
+			return 0;
+		}
+		$ldepth = $this->GetBalancedHeight($node->left);
+		if($ldepth == -1) {
+			return -1;
+		}
+
+		$rdepth = $this->GetBalancedHeight($node->right);
+		if($rdepth == -1) {
+			return -1;
+		}
+
+		if(abs($ldepth-$rdepth)>1) {
+			return -1;
+		}
+
+		return ($ldepth>$rdepth?$ldepth:$rdepth)+1;
+
+
+
+	} 
+
+	public function isBalanced() {
+		if($this->GetBalancedHeight($this->root)>=0) {
+			return true;
+		}
+		return false;
+
+	}
+
 
 }
 
 $array1 = [9,88,11,22,33,44,6,7,8,9];
+$array2 = [9,6,99,7,8];
+
 $bst = new BST;
 foreach($array1 as $num) {
 	$bst->Insert($num);
 }
+
+if($bst->isBalanced()) {
+	echo "balanced\n";\
+} else {
+	echo "not balanced \n";
+}
+
 $bst->printTree("PRE"); echo "\n";
 $bst->printTree("IN"); echo "\n";
 echo $bst->getTreeHeight();echo "\n";
